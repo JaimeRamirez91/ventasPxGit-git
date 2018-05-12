@@ -1,0 +1,49 @@
+
+body{
+    min-width: 900px;
+    /*min-height: px;*/
+    background-color: rgb(231, 240, 243); 
+}
+nav{
+    min-width: 900px !important;
+}
+.margen-top{
+    margin-top: 15px;
+}
+.margen-top-tabla{
+    margin-top: 30px;
+}
+#contenedor{
+    border: 0.05em solid #46b8da !important;
+    border-radius: 10px !important;
+    background:  rgb(227, 231, 229) !important;
+}
+
+.skin-label{
+    border: 2px solid whitesmoke !important;
+    border-radius: 10px !important;
+    background: rgb(42, 128, 168)  !important;
+    color: whitesmoke;
+    margin-right: 5px;
+}
+.skin-input{
+    border: 0.05em solid #46b8da ;
+    border-radius: 10px !important;
+    background:  #F2F5F3 ;
+    margin-right: 5px;
+}
+.skin-navbar{
+    background: rgb(50, 131, 168) !important;
+}
+.custom-btn{
+    border: 0.05em solid !important;
+    border-radius: 10px !important;
+    color: white !important;
+}
+.centrarTxt{
+    text-align: center !important;
+}
+
+.pagination {
+    margin: 0 auto !important;
+}
