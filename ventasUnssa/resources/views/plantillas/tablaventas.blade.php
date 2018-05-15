@@ -9,8 +9,8 @@
                     <th>Correlativo</th>
                     <th>Fecha y hora</th>
                     <th>Total</th>
-                    <th>Detalle</th>
-                    <th>Eliminar</th>
+                    <th>Acciones</th>
+            
                 </tr>
                 </thead>
                 <tbody>
@@ -25,10 +25,11 @@
                         <button class="btn btn-outline-success  btn-xs" onclick="">
                             <i class="fa fa-search"></i>
                         </button>
+                        <button class="btn  btn-outline-danger btn-xs" onclick="deleteVenta({{$dato->id}})">
+                            <i class="fa fa-remove"></i></button>
                     </td>
                     <td>
-                        <button class="btn  btn-outline-danger btn-xs" >
-                            <i class="fa fa-remove"></i></button>
+                        
                     </td>
                 </tr>
                 @endforeach

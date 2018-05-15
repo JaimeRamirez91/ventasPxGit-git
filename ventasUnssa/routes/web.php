@@ -17,4 +17,5 @@ Route::get('/', function () {
 });*/
 Route::view('/', 'ventas.ventas');
 Route::get('/',  ['as' => 'ventas.ventas', 'uses' => 'ventasController@listaVentas']);
+Route::get('/delete/venta',  ['as' => 'ventas.ventas', 'uses' => 'ventasController@deleteVenta']);
 Route::post('/',  ['as' => 'ventas.ventas', 'uses' => 'ventasController@registroVentas']);

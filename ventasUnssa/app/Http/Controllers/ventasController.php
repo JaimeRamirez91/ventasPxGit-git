@@ -119,11 +119,16 @@ class ventasController extends Controller
     }
 
     function listaVentas(){
-       /* $venta = Venta::join('Ventadetalles', 'ventas.id', '=', 'Ventadetalles.id_venta')
-        ->join('productos', 'productos.id', '=', 'Ventadetalles.id_producto')
-        ->paginate(4);*/
-        $venta = Venta::paginate(3);
+       /*Solo aparecen las ventas del día correspondiente */
+        $venta = Venta::whereDate('created_at', DB::raw('CURDATE()'))->paginate(7);
         return view('ventas.ventas')->with("ventas", $venta);
     }
    
+    function deleteVenta(Request $request){
+        $detalle =  Ventadetalle::where("id_venta","=", $request->valor);
+        $detalle->delete();
+        $venta = Venta::where("id","=",$request->valor);
+        $venta->delete();
+        return response()->json(['msj'=> "Registro eliminado"]);
+    }
 }

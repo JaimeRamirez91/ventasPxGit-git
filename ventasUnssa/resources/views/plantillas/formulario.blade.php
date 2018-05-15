@@ -1,6 +1,6 @@
 <li role="separator" class="divider"></li>
 <form >
-  <div class="container">
+  <div class="container" id="cont-principal-frm">
         <div class="row">
           <div class="col-lg-1"></div>
             <div class="col-lg-10" id="contenedor">
@@ -59,21 +59,17 @@
                     </div>
                 </div> 
             </div>
+            <div class="row">  
+                <div class="col-lg-1"></div>      
+                <div class="col-lg-10 text-center">
+                    <button type="button" class="btn btn-outline-success margen-top col-lg-2" onclick="guardarRegistro()" id="btnGuardar"><i class="fa fa-save ico"></i>Guardar </button>
+                    <button type="button" class="btn btn-outline-danger margen-top col-lg-2" onclick="limpiarRegistro()" id="btnLimpiar"><i class="fa fa-recycle ico"></i>Limpiar</button>
+                </div>
+                <div class="col-lg-1"></div>
+            </div> 
             </div>
+            
         </div>
 
   </div>
-  
-      <div class="container">
-        <div class="row">  
-                <div class="col-lg-1"></div>      
-                <div class="col-lg-10 text-center">
-                    <button type="button" class="btn btn-outline-success margen-top col-lg-2" onclick="guardarRegistro()" id="btnGuardar">Guardar</button>
-                    <button type="button" class="btn btn-outline-danger margen-top col-lg-2" onclick="limpiarRegistro()" id="btnLimpiar">Limpiar</button>
-                </div>
-                <div class="col-lg-1"></div>
-        </div> 
-      </div>    
-     
-  
 </form>

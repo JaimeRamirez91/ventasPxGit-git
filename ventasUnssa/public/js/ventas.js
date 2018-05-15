@@ -112,3 +112,22 @@ $(document).on('click', '#vnt-contenedor .pagination a', function(e){
   $("#inpFolder").focus();
   //document.getElementById('inpFolder').focus();
  });
+
+ function deleteVenta(id){
+    let varurl = "/delete/venta"; 
+    let a = 1;
+     $.alertable.confirm("Esta seguro de eliminar la venta con correlativo:"+id).then(function(){
+        $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},  
+            type: "get",
+            url : varurl,
+            datatype:'json',
+            data :{'valor': id,},
+            success : function(resul){
+                $("#vnt-contenedor").load(" #vnt-contenedor");
+                toastr.error(resul.msj ,"!!ATENCIÓN!!" ); 
+            }
+            });
+
+     });
+ }

@@ -1,7 +1,7 @@
 
 body{
     min-width: 900px;
-    /*min-height: px;*/
+    min-height: 1200px;
     background-color: rgb(231, 240, 243); 
 }
 nav{
@@ -17,6 +17,7 @@ nav{
     border: 0.05em solid #46b8da !important;
     border-radius: 10px !important;
     background:  rgb(227, 231, 229) !important;
+    height: 210px !important;
 }
 
 .skin-label{
@@ -47,3 +48,12 @@ nav{
 .pagination {
     margin: 0 auto !important;
 }
+.ico{
+    font-size: 14px !important;
+    padding: 5px;
+}
+#vnt-contenedor{
+    margin-top: 20px;
+    
+}
+
