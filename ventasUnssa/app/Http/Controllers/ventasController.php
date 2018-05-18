@@ -127,7 +127,7 @@ class ventasController extends Controller
     function deleteVenta(Request $request){
         $detalle =  Ventadetalle::where("id_venta","=", $request->valor);
         $detalle->delete();
-        $venta = Venta::where("id","=",$request->valor);
+        $venta = Venta::where("id","=", $request->valor); 
         $venta->delete();
         return response()->json(['msj'=> "Registro eliminado"]);
     }

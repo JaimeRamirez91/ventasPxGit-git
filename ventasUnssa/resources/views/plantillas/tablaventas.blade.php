@@ -44,5 +44,7 @@
              {{$ventas->render()}}
         </div>
     </div>
+
+   
              
 </div>

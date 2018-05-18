@@ -1,0 +1,115 @@
+.navColor{
+	background-color: #64abce !important;
+}
+ul li :hover{
+	background-color: #8ecae9 !important;
+}
+.active{
+    background-color: #8ecae9 !important;
+}
+.principal{
+    background: url("../img/home.jpg") no-repeat center center ;
+    background-size: cover;
+    
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    height: 610px;
+    /*opacidad*/
+    -khtml-opacity:.95; 
+    -moz-opacity:.95; 
+    -ms-filter:"alpha(opacity=95)";
+     filter:alpha(opacity=80);
+     filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0.95);
+     opacity:.95;
+    
+}
+.container-fluid{
+    padding: 0px !important;
+}
+.cnt-txt-descripcion{
+    margin-top:10% !important; 
+}
+h1{
+    color: rgba(248, 245, 245, 0.925);
+    text-align: center;
+    font-weight: 600;
+    font-size: 4em;
+}
+h2{
+    color: rgb(216, 206, 61);
+    text-align: center;
+    font-weight: 600;
+    font-size: 3em;
+}
+h3{
+    text-align: center;
+}
+h5{
+    text-align: center;
+}
+/*centrado del menu*/
+#navbar-collapse ul li{
+    float:center !important;
+    text-align:  center !important;
+    font-weight: 500;
+    
+}
+
+footer{
+    background-color: rgb(77, 74, 74) !important;
+    color: white !important;
+    margin: 0px !important;
+    text-align : justify !important;
+}
+
+#circulo-naranja{
+    height: 110px;
+    width: 110px;
+    background-color: rgb(224, 112, 37); 
+    border:0px solid #ccc;
+    border-radius: 100%;
+    text-align: center;
+    float: center;
+    margin: 0 auto;
+}
+#circulo-naranja > #logo-naranja{
+    color: white;
+    margin-top: 33px;
+    font-size: 50px;
+
+}
+
+#circulo-lila{
+    height: 110px;
+    width: 110px;
+    background-color: rgb(146, 55, 131); 
+    border:0px solid #ccc;
+    border-radius: 100%;
+    text-align: center;
+    float: center;
+    margin: 0 auto;
+}
+#circulo-lila > #logo-lila{
+    color: white;
+    margin-top: 33px;
+    font-size: 50px;
+
+}
+
+#circulo-rosa{
+    height: 110px;
+    width: 110px;
+    background-color: rgb(224, 37, 177); 
+    border:0px solid #ccc;
+    border-radius: 100%;
+    text-align: center;
+    float: center;
+    margin: 0 auto;
+}
+#circulo-rosa > #logo-rosa{
+    color: white;
+    margin-top: 33px;
+    font-size: 50px;
+
+}

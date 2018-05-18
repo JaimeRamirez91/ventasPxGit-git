@@ -1,4 +1,4 @@
-<li role="separator" class="divider"></li>
+<li role="separator" class="divider" style="color:white"></li>
 <form >
   <div class="container" id="cont-principal-frm">
         <div class="row">

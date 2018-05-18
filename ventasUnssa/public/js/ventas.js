@@ -17,7 +17,7 @@ function guardarRegistro(){
   if(v_folder == 1 && v_impresiones == 1 && v_faster ==1 && v_anillados == 1 && v_pBond == 1 && v_otros == 1 ){
     toastr.error("Inserción de datos nulos, !!Ingrese almenos un campo!!", "!!ATENCIÓN!!");
   }else{
-    var varurl = "/";
+    var varurl = "/ventas";
  
     $.ajax({
       headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},  
@@ -131,3 +131,8 @@ $(document).on('click', '#vnt-contenedor .pagination a', function(e){
 
      });
  }
+
+ 
+function cargarlistado(){  
+        window.open("crear_reporte_semana/1/12-2-12/12-2-12");
+}
