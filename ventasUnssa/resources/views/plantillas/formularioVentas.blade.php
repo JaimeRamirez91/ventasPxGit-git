@@ -4,6 +4,8 @@
         <div class="row">
           <div class="col-lg-1"></div>
             <div class="col-lg-10" id="contenedor">
+            <h4 class="bg-danger" style= " text-align: center; color: white; border: 1px solid #46b8da !important;
+         background: #0D939B !important; border-radius: 10px !important; margin-top:10px;">VENTAS</h4>     
             <div class="row margen-top">
             <div class="col-lg-4">
                     <div class="input-group mb-3">

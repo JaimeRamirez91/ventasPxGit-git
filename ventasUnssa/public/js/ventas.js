@@ -133,6 +133,9 @@ $(document).on('click', '#vnt-contenedor .pagination a', function(e){
  }
 
  
-function cargarlistado(){  
-        window.open("crear_reporte_semana/1/12-2-12/12-2-12");
+function cargarlistado(id){  
+        let desde = $('#datepickerF1').val();
+        let hasta =$('#datepickerF2').val();
+      //  alert("crear_reporte_semana/"+id+"/"+desde+"/"+hasta);
+        window.open("crear_reporte_semana/"+id+"/"+desde+"/"+hasta);
 }

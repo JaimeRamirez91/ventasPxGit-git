@@ -13,13 +13,19 @@ nav{
 .margen-top-tabla{
     margin-top: 30px;
 }
+
 #contenedor{
     border: 0.05em solid #46b8da !important;
     border-radius: 10px !important;
-    background:  rgb(227, 231, 229) !important;
+    background:rgb(227, 231, 229) !important;
+    height: 250px !important;
+}
+#contenedor-pdf{
+    border: 0.05em solid #46b8da !important;
+    border-radius: 10px !important;
+    background:rgb(230, 237, 238) !important;
     height: 210px !important;
 }
-
 .skin-label{
     border: 2px solid whitesmoke !important;
     border-radius: 10px !important;
@@ -49,11 +55,13 @@ nav{
     margin: 0 auto !important;
 }
 .ico{
-    font-size: 14px !important;
+    font-size: 16px !important;
     padding: 5px;
 }
 #vnt-contenedor{
     margin-top: 20px;
     
 }
-
+.gj-icon{
+    color: #17a2b8 !important;    
+}

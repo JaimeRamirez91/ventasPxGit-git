@@ -20,15 +20,18 @@ class PdfController extends Controller{
     }
 
     public function crear_reporte_porsemana($pdf, $desde, $hasta){
+      // $D =SimpleDateFormat.parse($desde);
+       //$H = SimpleDateFormat.parse($hasta);
+
         $vistaurl="pdf.reporte_por_semana";
 
-        $rawProductos = DB::raw("SELECT  p.nombre, p.precio as 'Precio_unitario',sum(v.cantidad) as 'cantidad', sum(v.total) as 'total' FROM  ventadetalles v, productos p 
-        WHERE v.id_producto = p.id  and CAST(v.created_at AS DATE) >= '2018-05-16' and CAST(v.created_at AS DATE) <= '2018-05-18'
+        $rawProductos = DB::raw('SELECT  p.nombre, p.precio as "Precio_unitario",sum(v.cantidad) as "cantidad", sum(v.total) as "total" FROM  ventadetalles v, productos p 
+        WHERE v.id_producto = p.id  and CAST(v.created_at AS DATE) >= " '.$desde.' " and CAST(v.created_at AS DATE) <= " ' .$hasta. ' "
         GROUP BY p.nombre, p.precio 
-        ORDER BY p.nombre;") ;
+        ORDER BY p.nombre');
 
-        $rawOtros = DB::raw("SELECT sum(total) as 'total' FROM  ventadetalles  
-        WHERE  CAST(created_at AS DATE) >= '2018-05-16' and CAST(created_at AS DATE) <= '2018-05-18'");
+        $rawOtros = DB::raw('SELECT sum(total) as "total" FROM  ventadetalles  
+        WHERE  CAST(created_at AS DATE) >= " '.$desde.' " and CAST(created_at AS DATE) <= " ' .$hasta. ' "');
 
         $productos = DB::select( $rawProductos);
         $total = DB::select($rawOtros);
