@@ -136,6 +136,38 @@ $(document).on('click', '#vnt-contenedor .pagination a', function(e){
 function cargarlistado(id){  
         let desde = $('#datepickerF1').val();
         let hasta =$('#datepickerF2').val();
-      //  alert("crear_reporte_semana/"+id+"/"+desde+"/"+hasta);
-        window.open("crear_reporte_semana/"+id+"/"+desde+"/"+hasta);
+        let f_val_ini = validarFormatoFecha(desde);
+        let f_val_fin = validarFormatoFecha(hasta);
+        let resultado =  existeFecha(desde);
+        //alert(resultado);
+         
+        if(f_val_ini == false ||  f_val_fin == false){
+            toastr.error("Fechas Invalidas" ,"!!ATENCIÓN!!" ); 
+        }else{
+            window.open("crear_reporte_semana/"+id+"/"+desde+"/"+hasta);
+        }  
+       
+}
+
+/*validar fechas*/
+$("#datepickerF1").prop('disabled', true);
+$("#datepickerF2").prop('disabled', true);
+    
+     
+
+function validarFormatoFecha(campo) {
+    var RegExPattern = /^\d{2,4}\-\d{1,2}\-\d{1,2}$/;
+    if ((campo.match(RegExPattern)) && (campo!='')) {
+          return true;
+    } else {
+          return false;
+    }
+}
+
+function existeFecha (fecha) {
+    var fechaf = fecha.split("-");
+    var y = fechaf[0];
+    var m = fechaf[1];
+    var d = fechaf[2];
+    return m > 0 && m < 13 && y > 0 && y < 32768 && d > 0 && d <= (new Date(y, m, 0)).getDate();
 }
