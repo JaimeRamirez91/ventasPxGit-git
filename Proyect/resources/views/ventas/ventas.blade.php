@@ -7,4 +7,6 @@
      <div id="vnt-contenedor">
         @include('plantillas.tablaventas')
      </div>
+     @include('plantillas.formularioEditarVentas')
+
 @stop

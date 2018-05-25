@@ -19,6 +19,7 @@ class PdfController extends Controller{
         if($pdf_tipo==2){return $pdf->download('reporte.pdf'); }
     }
 
+
     public function crear_reporte_porsemana($pdf, $desde, $hasta){
       // $D =SimpleDateFormat.parse($desde);
        //$H = SimpleDateFormat.parse($hasta);
@@ -29,7 +30,7 @@ class PdfController extends Controller{
         WHERE v.id_producto = p.id  and CAST(v.created_at AS DATE) >= " '.$desde.' " and CAST(v.created_at AS DATE) <= " ' .$hasta. ' "
         GROUP BY p.nombre, p.precio 
         ORDER BY p.nombre');
-
+          
         $rawOtros = DB::raw('SELECT sum(total) as "total" FROM  ventadetalles  
         WHERE  CAST(created_at AS DATE) >= " '.$desde.' " and CAST(created_at AS DATE) <= " ' .$hasta. ' "');
 
@@ -38,6 +39,7 @@ class PdfController extends Controller{
 
         return $this->crearPDF($productos, $total, $vistaurl, $pdf, $desde);
        }
+       
     }
    
 

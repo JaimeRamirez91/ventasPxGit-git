@@ -11,8 +11,7 @@
         
         <!-- Modal body -->
         <div class="modal-body">
-         !!Esta seguro que desea eliminar el registro
-        </div>
+        @include('plantillas.tablaDetalle')
         
         <!-- Modal footer -->
         <div class="modal-footer">

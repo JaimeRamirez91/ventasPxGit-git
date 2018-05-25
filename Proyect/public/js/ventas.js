@@ -171,3 +171,25 @@ function existeFecha (fecha) {
     var d = fechaf[2];
     return m > 0 && m < 13 && y > 0 && y < 32768 && d > 0 && d <= (new Date(y, m, 0)).getDate();
 }
+
+function mostrarDetalle(id){
+    let varurl = "/detalle/venta";
+    $.ajax({
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},  
+        type: "get",
+        url : varurl,
+        datatype:'json',
+        data :{'valor': id,},
+        success : function(resul){
+               console.log(resul);
+               let html = " ";
+               $.each( resul , function( iteraciones , valores ){
+                html = $.parseHTML(valores);   
+               // alert(valores);
+              });
+               let str = "<h1> hola soy una prueba</h1>";
+               $("#vnt-contenedor").html(html);
+        }
+        });
+
+}

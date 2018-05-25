@@ -15,14 +15,12 @@
                 </thead>
                 <tbody>
                 @foreach($ventas as $dato)
-                 
-              
                 <tr>    
                     <td>{{$dato->id}}</td>
                     <td>{{$dato->created_at}}</td>
                     <td>$ {{$dato->total}}</td>
                     <td>
-                        <button class="btn btn-outline-success  btn-xs" onclick="">
+                        <button class="btn btn-outline-success  btn-xs" onclick="mostrarDetalle({{$dato->id}})">
                             <i class="fa fa-search"></i>
                         </button>
                         <button class="btn  btn-outline-danger btn-xs" onclick="deleteVenta({{$dato->id}})">

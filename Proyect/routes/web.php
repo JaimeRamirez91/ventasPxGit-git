@@ -15,13 +15,17 @@
 $this->get('/', function () {
     return view('welcome');
 })->name('/');
+
+$this->get('/prueba', function () {
+    return view('plantillas.tablaDetalle');
+})->name('/');
+
 Route::get('/reportes', function () {
     return view('pdf.reportePage');
 });
-//Route::view('/reportes-lista');
-//Route::get('/', 'welcome');
 Route::get('/ventas',  ['as' => 'ventas.ventas', 'uses' => 'ventasController@listaVentas']);
 Route::get('/delete/venta',  ['as' => 'ventas.ventas', 'uses' => 'ventasController@deleteVenta']);
+Route::get('/detalle/venta',  ['as' => 'ventas.ventas', 'uses' => 'ventasController@detalleVenta']);
 Route::post('/ventas',  ['as' => 'ventas.ventas', 'uses' => 'ventasController@registroVentas']);
 
 Route::get('crear_reporte_semana/{pdf}/{desde}/{hasta}', 'PdfController@crear_reporte_porsemana');

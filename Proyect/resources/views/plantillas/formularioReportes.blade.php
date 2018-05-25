@@ -1,7 +1,6 @@
 <li role="separator" class="divider" style="color:white"></li>
 <form >
   <div class="container" id="cont-principal-frm">
- 
         <div class="row">
           <div class="col-lg-1"></div>
             <div class="col-lg-10" id="contenedor-pdf">    

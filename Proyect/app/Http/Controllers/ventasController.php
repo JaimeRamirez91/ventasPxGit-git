@@ -11,7 +11,6 @@ use Validator;
 use Illuminate\Validation\Rule;
 use App\Venta;
 use App\Ventadetalle;
-
 class ventasController extends Controller
 {
     function registroVentas(Request $request){
@@ -120,8 +119,10 @@ class ventasController extends Controller
 
     function listaVentas(){
        /*Solo aparecen las ventas del día correspondiente */
-        $venta = Venta::whereDate('created_at', DB::raw('CURDATE()'))->paginate(7);
-        return view('ventas.ventas')->with("ventas", $venta);
+      
+        $ventas = Venta::whereDate('created_at', DB::raw('CURDATE()'))->paginate(7);
+        //return view('ventas.ventas')->with("ventas", $venta);
+         return view('ventas.ventas', compact('ventas')); 
     }
    
     function deleteVenta(Request $request){
@@ -131,4 +132,70 @@ class ventasController extends Controller
         $venta->delete();
         return response()->json(['msj'=> "Registro eliminado"]);
     }
+
+    function detalleVenta(Request $request){
+        $rawProductos = DB::raw("select (v.id_venta) as c_venta,(p.nombre) as p_nombre, (v.cantidad) as u_vendida, (v.id) as detalle_id, (p.precio) as pre_unitario  
+        from ventadetalles v, productos p
+        where id_venta =".$request->valor."  
+        and v.id_producto = p.id
+        ORDER BY p.nombre");
+        try{
+            $detalle = DB::select($rawProductos);
+            $cadena ='<div class="container margen-top-tabla"> <div class="row margen-top">
+                <div class="col-lg-1"></div> <div class="col-lg-10">
+                <h5 class="text-center">VENTAS DIARIAS</h5> <table class="table text-center">
+                <thead> <tr>
+                            <th>Identificador</th>
+                            <th>Producto</th>
+                            <th>Unidades Vendidas</th>
+                            <th>Id detalle</th>
+                            <th>Precio unitario</th>
+                        </tr></thead><tbody>
+                        ';
+           
+            for ($i = 0; $i < count($detalle); $i++){
+                 
+                $Contador = 1; 
+                 
+                foreach ($detalle[$i] as $dato ){
+                  
+                    if($i == $i){
+
+                            if($Contador == 1){
+                                //agrega nueva fila 
+                                $cadena .="  <tr> " ;
+                            }
+
+                            //Concatenación  de varianle a cadena original
+                            $cadena .="  <td> ". $dato . "</td>  ";
+
+                            if($Contador == 5){
+                                //cierra la fila agregada en contador = 0 
+                                $cadena .="  </tr> " ;
+
+                                //Reset a la variable contador  
+                                $Contador = 0;
+                            }
+
+                        //Contador es igual a lo que trae más 1 
+                        $Contador = $Contador + 1;
+                    }
+
+                //end foreach    
+                }
+            //end for    
+            }
+
+            $finalCadena = '</tbody> </table> </div> <div class="col-lg-1"></div> </div>
+                           <div class="container" > <div class="row"> </div> </div> </div>'; 
+             
+            $cadenaHTML =  $cadena. $finalCadena;             
+            return response()->json([$cadenaHTML]);
+        } catch(\Illuminate\Database\QueryException $e){
+            return response()->json(['msj'=> $e]);
+        }
+       
+      //  return view('ventas.ventas')->with("ventas", $venta);
+         
+     }
 }

@@ -65,3 +65,8 @@ nav{
 .gj-icon{
     color: #17a2b8 !important;    
 }
+
+.centrar{
+    text-align: center !important;
+    margin: 0 auto;
+  }
