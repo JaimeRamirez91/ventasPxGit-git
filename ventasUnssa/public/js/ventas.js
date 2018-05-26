@@ -188,8 +188,31 @@ function mostrarDetalle(id){
                // alert(valores);
               });
                let str = "<h1> hola soy una prueba</h1>";
-               $("#vnt-contenedor").html(html);
+               $("#contenido-modal").html(html);
+               $('#modalEditVenta').modal('show');
         }
         });
 
 }
+
+function deleteDetalle(id){
+    let varurl = "/delete/venta"; 
+    let a = 1;
+     $.alertable.confirm("Esta seguro de eliminar el elemento con correlativo:"+id).then(function(){
+       /* $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},  
+            type: "get",
+            url : varurl,
+            datatype:'json',
+            data :{'valor': id,},
+            success : function(resul){
+                $("#vnt-contenedor").load(" #vnt-contenedor");
+                toastr.error(resul.msj ,"!!ATENCIÓN!!" ); 
+            }
+            });*/
+
+     });
+ }
+ function transformarEnEditable(nodo){
+     alert(nodo);
+ }

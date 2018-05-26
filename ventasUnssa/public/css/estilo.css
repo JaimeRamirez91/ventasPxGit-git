@@ -8,10 +8,10 @@ nav{
     min-width: 900px !important;
 }
 .margen-top{
-    margin-top: 15px;
+    margin-top: 5px;
 }
 .margen-top-tabla{
-    margin-top: 30px;
+    margin-top: 10px;
 }
 
 #contenedor{
@@ -70,3 +70,7 @@ nav{
     text-align: center !important;
     margin: 0 auto;
   }
+
+.ancho_celdas{
+    width: 200px !important;
+}

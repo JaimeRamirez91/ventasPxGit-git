@@ -6,7 +6,6 @@
 <title>Titulo de la web</title>
 <meta charset="utf-8" />
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<link rel="stylesheet" href="estilos.css" />
 <link rel="shortcut icon" href="/favicon.ico" />
 <link rel="alternate" title="Pozolería RSS" type="application/rss+xml" href="/feed.rss" />
 <script src="{{'js/app.js'}}"></script>

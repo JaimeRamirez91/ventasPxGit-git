@@ -120,7 +120,7 @@ class ventasController extends Controller
     function listaVentas(){
        /*Solo aparecen las ventas del día correspondiente */
       
-        $ventas = Venta::whereDate('created_at', DB::raw('CURDATE()'))->paginate(7);
+        $ventas = Venta::whereDate('created_at', DB::raw('CURDATE()'))->paginate(3);
         //return view('ventas.ventas')->with("ventas", $venta);
          return view('ventas.ventas', compact('ventas')); 
     }
@@ -134,7 +134,7 @@ class ventasController extends Controller
     }
 
     function detalleVenta(Request $request){
-        $rawProductos = DB::raw("select (v.id_venta) as c_venta,(p.nombre) as p_nombre, (v.cantidad) as u_vendida, (v.id) as detalle_id, (p.precio) as pre_unitario  
+        $rawProductos = DB::raw("select (v.id_venta) as c_venta,(p.nombre) as p_nombre, (v.cantidad) as u_vendida, (p.precio) as pre_unitario  
         from ventadetalles v, productos p
         where id_venta =".$request->valor."  
         and v.id_producto = p.id
@@ -143,13 +143,14 @@ class ventasController extends Controller
             $detalle = DB::select($rawProductos);
             $cadena ='<div class="container margen-top-tabla"> <div class="row margen-top">
                 <div class="col-lg-1"></div> <div class="col-lg-10">
-                <h5 class="text-center">VENTAS DIARIAS</h5> <table class="table text-center">
+                 <table class="table text-center">
                 <thead> <tr>
                             <th>Identificador</th>
                             <th>Producto</th>
-                            <th>Unidades Vendidas</th>
-                            <th>Id detalle</th>
-                            <th>Precio unitario</th>
+                            <th>U/V</th>
+                            <th>P/U</th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
                         </tr></thead><tbody>
                         ';
            
@@ -169,9 +170,16 @@ class ventasController extends Controller
                             //Concatenación  de varianle a cadena original
                             $cadena .="  <td> ". $dato . "</td>  ";
 
-                            if($Contador == 5){
+                            if($Contador == 4){
                                 //cierra la fila agregada en contador = 0 
-                                $cadena .="  </tr> " ;
+                                $cadena .=" <td>
+                                <button class='btn btn-outline-success  btn-xs' onclick='transformarEnEditable(this)'>
+                                    <i class='fa fa-edit'></i>
+                                </button> </td>
+                                <td>
+                                <button class='btn  btn-outline-danger btn-xs' onclick='deleteDetalle(1)'>
+                                    <i class='fa fa-remove'></i></button>
+                            </td>  </tr> " ;
 
                                 //Reset a la variable contador  
                                 $Contador = 0;
@@ -198,4 +206,12 @@ class ventasController extends Controller
       //  return view('ventas.ventas')->with("ventas", $venta);
          
      }
+    
+     function deleteDetalle(Request $request){
+        $detalle =  Ventadetalle::where("id_venta","=", $request->valor);
+        $detalle->delete();
+        $venta = Venta::where("id","=", $request->valor); 
+        $venta->delete();
+        return response()->json(['msj'=> "Registro eliminado"]);
+    }
 }
