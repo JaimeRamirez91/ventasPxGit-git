@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Producto extends Model
 {
     protected $fillable = [
-       'nombre', 'precio', 'created_at', 'updated_at',
+       'nombre', 'precio', 'created_at', 'updated_at', 'id',
     ];
     protected $hidden = [
-        'id',
+       
     ];
     /*
      public function ventadetalle(){

@@ -11,6 +11,7 @@ use Validator;
 use Illuminate\Validation\Rule;
 use App\Venta;
 use App\Ventadetalle;
+use App\Producto;
 class ventasController extends Controller
 {
     function registroVentas(Request $request){
@@ -143,7 +144,7 @@ class ventasController extends Controller
             $detalle = DB::select($rawProductos);
             $cadena ='<div class="container margen-top-tabla"> <div class="row margen-top">
                 <div class="col-lg-1"></div> <div class="col-lg-10">
-                 <table class="table text-center">
+                 <table id="tabla" class="table text-center">
                 <thead> <tr>
                             <th>Identificador</th>
                             <th>Producto</th>
@@ -156,7 +157,8 @@ class ventasController extends Controller
            
             for ($i = 0; $i < count($detalle); $i++){
                  
-                $Contador = 1; 
+                $Contador = 1;
+                $indice   = $i+ 1; 
                  
                 foreach ($detalle[$i] as $dato ){
                   
@@ -164,33 +166,37 @@ class ventasController extends Controller
 
                             if($Contador == 1){
                                 //agrega nueva fila 
-                                $cadena .="  <tr> " ;
+                                $cadena .="  <tr id='". $indice."' href='". $indice."'> " ;
                             }
 
                             //Concatenación  de varianle a cadena original
-                            $cadena .="  <td> ". $dato . "</td>  ";
+                            $cadena .="  <td>  ". $dato . "</td>  ";
 
                             if($Contador == 4){
                                 //cierra la fila agregada en contador = 0 
                                 $cadena .=" <td>
-                                <button class='btn btn-outline-success  btn-xs' onclick='transformarEnEditable(this)'>
+                                <button id='btn-edit' class='btn btn-outline-success  btn-xs' onclick='transformarEnEditable(this)'>
                                     <i class='fa fa-edit'></i>
                                 </button> </td>
                                 <td>
-                                <button class='btn  btn-outline-danger btn-xs' onclick='deleteDetalle(1)'>
+                                <button id='btn-delete' class='btn  btn-outline-danger btn-xs'>
                                     <i class='fa fa-remove'></i></button>
                             </td>  </tr> " ;
 
                                 //Reset a la variable contador  
                                 $Contador = 0;
+                               // $indice = 0;
+                               
                             }
 
                         //Contador es igual a lo que trae más 1 
                         $Contador = $Contador + 1;
+                       
                     }
 
                 //end foreach    
                 }
+                //$indice = $indice + 1 ;
             //end for    
             }
 
@@ -208,10 +214,35 @@ class ventasController extends Controller
      }
     
      function deleteDetalle(Request $request){
-        $detalle =  Ventadetalle::where("id_venta","=", $request->valor);
-        $detalle->delete();
-        $venta = Venta::where("id","=", $request->valor); 
-        $venta->delete();
-        return response()->json(['msj'=> "Registro eliminado"]);
+        $raw = DB::raw('select id from productos where nombre = "'.$request->producto.'";'); 
+        $Producto = DB::select($raw);
+        $id_producto = 0;
+
+       for ($i = 0; $i < count($Producto); $i++){
+            foreach($Producto[$i] as $valor){
+                $id_producto = $valor;
+            }
+        }
+        $eliminarDetalle =  Ventadetalle::where("id_venta","=", $request->venta)->where("id_producto","=", $id_producto);
+        $eliminarDetalle->delete();
+        
+        $rawVentaVrf = DB::raw("select total from ventas where id =".$request->venta.";");
+        $venta = DB::select($rawVentaVrf);
+       
+        for ($i = 0; $i < count($venta); $i++){
+            foreach($venta[$i] as $valor){
+                $total = $valor;
+            }
+        }
+        
+        if($total == NULL){
+            $rawValidate = DB::raw('UPDATE ventas set total = 0 WHERE id ='.$request->venta.'  and ISNULL(total) != 0  ;'); 
+            $venta = DB::update($rawValidate);
+        }else{ }
+
+        return response()->json(['msj'=>"REGISTROS ELIMINADO"]);  
+       
     }
+    
 }
+

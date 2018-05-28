@@ -16,7 +16,6 @@
 <link href="css/jquery.alertable.css" rel="stylesheet">
 <link href="css/estilo.css" rel="stylesheet">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<script src="3.3.1.min.js"></script>
 <script src="js/gijgo.js" type="text/javascript"></script>
 <link href="css/open-iconic-bootstrap.css" rel="stylesheet" type="text/css" />
 <link href="css/gijgo.css" rel="stylesheet" type="text/css" />

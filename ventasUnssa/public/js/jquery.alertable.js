@@ -5,6 +5,9 @@
 //
 // Licensed under the MIT license: http://opensource.org/licenses/MIT
 //
+
+
+/*Modificacion linea 109 debido a error de boot loop*/
 if(jQuery) (function($) {
   'use strict';
 
@@ -106,13 +109,13 @@ if(jQuery) (function($) {
       }
     });
 
-    // Prevent focus from leaving the modal
+    // Prevent focus from leaving the modal   Eliminado por error inexolicable
     $(document).on('focus.alertable', '*', function(event) {
-      if(!$(event.target).parents().is('.alertable')) {
+      /*if(!$(event.target).parents().is('.alertable')) {
         event.stopPropagation();
         event.target.blur();
         $(modal).find(':input:first').focus();
-      }
+      }*/
     });
 
     return defer.promise();

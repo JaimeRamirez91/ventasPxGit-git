@@ -26,6 +26,7 @@ Route::get('/reportes', function () {
 Route::get('/ventas',  ['as' => 'ventas.ventas', 'uses' => 'ventasController@listaVentas']);
 Route::get('/delete/venta',  ['as' => 'ventas.ventas', 'uses' => 'ventasController@deleteVenta']);
 Route::get('/detalle/venta',  ['as' => 'ventas.ventas', 'uses' => 'ventasController@detalleVenta']);
+Route::get('/delete/detalle',  ['as' => 'ventas.ventas', 'uses' => 'ventasController@deleteDetalle']);
 Route::post('/ventas',  ['as' => 'ventas.ventas', 'uses' => 'ventasController@registroVentas']);
 
 Route::get('crear_reporte_semana/{pdf}/{desde}/{hasta}', 'PdfController@crear_reporte_porsemana');

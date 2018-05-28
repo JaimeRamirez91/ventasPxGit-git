@@ -110,6 +110,7 @@ $(document).on('click', '#vnt-contenedor .pagination a', function(e){
  
  $(document).ready(function(){
   $("#inpFolder").focus();
+  
   //document.getElementById('inpFolder').focus();
  });
 
@@ -181,7 +182,7 @@ function mostrarDetalle(id){
         datatype:'json',
         data :{'valor': id,},
         success : function(resul){
-               console.log(resul);
+              // console.log(resul);
                let html = " ";
                $.each( resul , function( iteraciones , valores ){
                 html = $.parseHTML(valores);   
@@ -195,24 +196,58 @@ function mostrarDetalle(id){
 
 }
 
-function deleteDetalle(id){
-    let varurl = "/delete/venta"; 
-    let a = 1;
-     $.alertable.confirm("Esta seguro de eliminar el elemento con correlativo:"+id).then(function(){
-       /* $.ajax({
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},  
-            type: "get",
-            url : varurl,
-            datatype:'json',
-            data :{'valor': id,},
-            success : function(resul){
-                $("#vnt-contenedor").load(" #vnt-contenedor");
-                toastr.error(resul.msj ,"!!ATENCIÓN!!" ); 
-            }
-            });*/
 
-     });
- }
- function transformarEnEditable(nodo){
-     alert(nodo);
- }
+ $('body').on('click', '#tabla #btn-edit',function(e){
+  //  e.preventDefault;
+    idsele = $(this).parent().parent().attr("href");
+    nombre = $(this).parent().parent().children('td:eq(1)').text();
+    row= document.getElementById(idsele);
+  //  alert(nombre);
+    alert(idsele);
+    row= document.getElementById(idsele);
+  
+     if (!row){
+         alert("El elemento selecionado no existe");
+     } else {
+         padre = row.parentNode;
+         padre.removeChild(row);
+     }
+  });
+
+ $('body').on('click', '#tabla #btn-delete',function(e){
+   let varurl = "/delete/detalle";   
+   e.preventDefault;
+   let idsele = $(this).parent().parent().attr("href");
+   let row= document.getElementById(idsele);
+
+   let id_venta = $(this).parent().parent().children('td:eq(0)').text();
+   let nombre = $(this).parent().parent().children('td:eq(1)').text();
+
+    if (!row){
+        toastr.error("El elemento selecionado no existe" ,"!!ATENCIÓN!!" ); 
+    } else {
+
+        $.alertable.confirm("Esta seguro de eliminar el producto:"+ nombre +" del registro de ventas").then(function(){
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},  
+                type: "get",
+                url : varurl,
+                datatype:'json',
+                data :{'producto': nombre, 'venta': id_venta,} ,
+                     success : function(resul){
+                   // console.log(resul);
+                    toastr.success(resul.msj,"!!ATENCIÓN!!" ); 
+                    padre = row.parentNode;
+                    padre.removeChild(row);
+                   // $("#vnt-contenedor").load("/ventas");
+                }
+                });
+
+            
+
+        });
+
+    }
+ });
+
+ 
