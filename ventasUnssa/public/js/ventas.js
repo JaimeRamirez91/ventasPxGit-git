@@ -200,19 +200,32 @@ function mostrarDetalle(id){
  $('body').on('click', '#tabla #btn-edit',function(e){
   //  e.preventDefault;
     idsele = $(this).parent().parent().attr("href");
-    nombre = $(this).parent().parent().children('td:eq(1)').text();
+    nombre = $(this).parent().parent().children('td:eq(0)').text();
+    nombre1 = $(this).parent().parent().children('td:eq(1)').text();
+    nombre2 = $(this).parent().parent().children('td:eq(2)').text();
     row= document.getElementById(idsele);
-  //  alert(nombre);
-    alert(idsele);
-    row= document.getElementById(idsele);
-  
-     if (!row){
-         alert("El elemento selecionado no existe");
-     } else {
-         padre = row.parentNode;
-         padre.removeChild(row);
-     }
+
+    let input="<input id='prueba"+idsele+"' style='width:50px;' type='text' name='nombredelacaja'>"; 
+    let input1="<input id='prueba1"+idsele+"' style='width:70px;' type='text' name='nombredelacaja'>";
+    let input2="<input id='prueba2"+idsele+"' style='width:50px;' type='text' name='nombredelacaja'>";
+    let btn_Update = "<button id='btn-update' class='btn btn-outline-success  btn-xs' onclick=''><i class='fa fa-refresh '></i></button> ";  
+
+    $(this).parent().parent().children('td:eq(0)').html(input);
+    $(this).parent().parent().children('td:eq(1)').html(input1);
+    $(this).parent().parent().children('td:eq(2)').html(input2);
+    $(this).parent().parent().children('td:eq(4)').html(btn_Update);
+    $('#prueba'+idsele).val(nombre);
+    $('#prueba1'+idsele).val(nombre1);
+    $('#prueba2'+idsele).val(nombre2);
+    $("#prueba"+idsele).focus();
+
   });
+
+  $('body').on('click', '#tabla #btn-update',function(e){
+    idsele = $(this).parent().parent().attr("href");
+    alert(idsele);
+      
+  });  
 
  $('body').on('click', '#tabla #btn-delete',function(e){
    let varurl = "/delete/detalle";   
@@ -239,7 +252,7 @@ function mostrarDetalle(id){
                     toastr.success(resul.msj,"!!ATENCIÓN!!" ); 
                     padre = row.parentNode;
                     padre.removeChild(row);
-                   // $("#vnt-contenedor").load("/ventas");
+                    $("#vnt-contenedor").load(" #vnt-contenedor");
                 }
                 });
 

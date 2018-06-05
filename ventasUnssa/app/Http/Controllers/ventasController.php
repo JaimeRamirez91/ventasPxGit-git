@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -175,7 +174,7 @@ class ventasController extends Controller
                             if($Contador == 4){
                                 //cierra la fila agregada en contador = 0 
                                 $cadena .=" <td>
-                                <button id='btn-edit' class='btn btn-outline-success  btn-xs' onclick='transformarEnEditable(this)'>
+                                <button id='btn-edit' class='btn btn-outline-success  btn-xs' onclick=''>
                                     <i class='fa fa-edit'></i>
                                 </button> </td>
                                 <td>
