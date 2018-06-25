@@ -1,11 +1,11 @@
 
 body{
-    min-width: 900px;
-    min-height: 1200px;
+   /* min-width: 900px;*/
+   /* min-height: 1200px;*/
     background-color: rgb(231, 240, 243); 
 }
 nav{
-    min-width: 900px !important;
+   /* min-width: 900px !important;*/
 }
 .margen-top{
     margin-top: 5px;
@@ -13,13 +13,13 @@ nav{
 .margen-top-tabla{
     margin-top: 10px;
 }
-
+/*
 #contenedor{
     border: 0.05em solid #46b8da !important;
     border-radius: 10px !important;
     background:rgb(227, 231, 229) !important;
     height: 250px !important;
-}
+}*/
 #contenedor-pdf{
     border: 0.05em solid #46b8da !important;
     border-radius: 10px !important;
@@ -87,3 +87,135 @@ nav{
     background-color: #0585C0;
     color: white;
 }
+
+.style{
+    font-size: 10px !important;
+
+}
+#UsrName{
+    margin-right: 20px !important;
+    color: white;
+    
+}
+
+@media (min-width: 1200px) {
+    #contenedor{
+        border: 0.05em solid #46b8da !important;
+        border-radius: 10px !important;
+        background:rgb(227, 231, 229) !important;
+        height: 250px !important;
+    }
+
+    .inp_estilo{
+        border: 2px solid rgb(197, 193, 193) !important;
+        border-radius: 10px !important;
+        width: 75px !important;
+    }
+	 
+
+ }
+ 
+ 
+ /* Landscape tablets and medium desktops */
+ 
+ @media (min-width: 992px) and (max-width: 1199px) {
+    #contenedor{
+        border: 0.05em solid #46b8da !important;
+        border-radius: 10px !important;
+        background:rgb(227, 231, 229) !important;
+        height: 250px !important;
+    }
+    .inp_estilo{
+        border: 2px solid rgb(197, 193, 193) !important;
+        border-radius: 10px !important;
+        width: 75px !important;
+    }
+	 
+ } 
+ 
+ /* Portrait tablets and small desktops */
+ 
+ @media (min-width: 768px) and (max-width: 991px) {
+	
+    #contenedor{
+        border: 0.05em solid #46b8da !important;
+        border-radius: 10px !important;
+        background:rgb(227, 231, 229) !important;
+        height: 500px !important;
+    }
+    span{
+        width: 125px !important;
+    }
+    .inp_estilo{
+        border: 2px solid rgb(197, 193, 193) !important;
+        border-radius: 10px !important;
+        width: 40px !important;
+    }
+    #calendario{
+        margin-left: 35% !important;
+      }
+      li a {
+        text-align: center !important;
+    }
+    #UsrName{
+       float: left !important;
+    }
+    #UsrCloseSesion{
+      float: right !important;
+      margin-right: 20px;
+      
+   }
+ }
+ 
+ 
+ /* Landscape phones and portrait tablets */
+ 
+ @media (min-width: 128px) and (max-width: 767px) {
+    #contenedor{
+        border: 0.05em solid #46b8da !important;
+        border-radius: 10px !important;
+        background:rgb(227, 231, 229) !important;
+        height: 500px !important;
+        
+       
+    }
+    span{
+        width: 125px !important;
+    }
+    #btn-G-venta{
+        margin-left: 36% !important;
+        margin-right: 36% !important;
+    }
+    #btn-L-venta{
+        margin-left: 36% !important;
+        margin-right: 36% !important; 
+    }
+    .inp_estilo{
+        border: 2px solid rgb(197, 193, 193) !important;
+        border-radius: 10px !important;
+        width: 40px !important;
+    }
+   
+    #contenedor-pdf{
+        border: 0.05em solid #46b8da !important;
+        border-radius: 10px !important;
+        background:rgb(230, 237, 238) !important;
+        height: 250px !important;
+    }
+    #calendario{
+        margin-left: 35% !important;
+      }
+      li a {
+          text-align: center !important;
+      }
+      #UsrName{
+         float: left !important;
+      }
+      #UsrCloseSesion{
+        float: right !important;
+        margin-right: 20px;
+
+     }
+ }
+
+ 

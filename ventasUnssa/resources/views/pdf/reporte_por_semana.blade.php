@@ -116,8 +116,8 @@ table {
                   <thead>
                      <tr style="text-aling:center">
                       <th>Producto</th>
-                      <th>Precio Unitario</th>
-                      <th >Unidades Vendidas</th>
+                      <th>P/U</th>
+                      <th >U/V</th>
                       <th>Total</th>
                     </tr>
                   </thead>
@@ -126,27 +126,27 @@ table {
 
                   @foreach($Productos as $dato)
                   <tr >    
-                     <td style="text-aling:center">{{$dato->nombre}}</td>
+                     <td>{{$dato->nombre}}</td>
                      <td>$ {{$dato->Precio_unitario}}</td>
                      <td>{{$dato->cantidad}}</td>
                      <td>$ {{$dato->total}}</td>
                   </tr>
                   @endforeach
                   <tr >    
-                     <td style="text-aling:center"> </td>
+                     <td > </td>
                      <td> </td>
                      <td> </td>
                      <td> </td>
                   </tr>
                   <tr >    
-                     <td style="text-aling:center"> </td>
+                     <td > </td>
                      <td> </td>
                      <td> </td>
                      <td> </td>
                   </tr>
                   @foreach($Total as $dato)
                   <tr >    
-                     <td style="text-aling:center">TOTAL VENTAS</td>
+                     <td >TOTAL VENTAS</td>
                      <td> </td>
                      <td> </td>
                      <td>$ {{$dato->total}}</td>

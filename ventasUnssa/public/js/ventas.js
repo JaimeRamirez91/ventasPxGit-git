@@ -182,6 +182,7 @@ function mostrarDetalle(id){
         datatype:'json',
         data :{'valor': id,},
         success : function(resul){
+            
               // console.log(resul);
                let html = " ";
                $.each( resul , function( iteraciones , valores ){
@@ -204,26 +205,52 @@ function mostrarDetalle(id){
     nombre1 = $(this).parent().parent().children('td:eq(1)').text();
     nombre2 = $(this).parent().parent().children('td:eq(2)').text();
     row= document.getElementById(idsele);
-
-    let input="<input id='prueba"+idsele+"' style='width:50px;' type='text' name='nombredelacaja'>"; 
-    let input1="<input id='prueba1"+idsele+"' style='width:70px;' type='text' name='nombredelacaja'>";
-    let input2="<input id='prueba2"+idsele+"' style='width:50px;' type='text' name='nombredelacaja'>";
+    let VU="<input id='fila"+idsele+"' class='inp_estilo' style='width:50px;' type='text' name='nombredelacaja'>";
     let btn_Update = "<button id='btn-update' class='btn btn-outline-success  btn-xs' onclick=''><i class='fa fa-refresh '></i></button> ";  
-
-    $(this).parent().parent().children('td:eq(0)').html(input);
-    $(this).parent().parent().children('td:eq(1)').html(input1);
-    $(this).parent().parent().children('td:eq(2)').html(input2);
+    $(this).parent().parent().children('td:eq(2)').html(VU);
     $(this).parent().parent().children('td:eq(4)').html(btn_Update);
-    $('#prueba'+idsele).val(nombre);
-    $('#prueba1'+idsele).val(nombre1);
-    $('#prueba2'+idsele).val(nombre2);
-    $("#prueba"+idsele).focus();
+   // $(this).parent().parent().children('td:eq(5)').hide();
+  
+    //$('#th-action').html('Actua.');
+    $('#fila'+idsele).val(nombre2);
+    $("#fila"+idsele).focus();
+    //$('#th-action').html('Actua.');
+    
 
   });
 
+  //Update Detalle unidades vendidas
   $('body').on('click', '#tabla #btn-update',function(e){
     idsele = $(this).parent().parent().attr("href");
-    alert(idsele);
+    let btn_Edit = "<button id='btn-edit' class='btn btn-outline-success  btn-xs' onclick=''><i class='fa fa-edit '></i></button> "; 
+    let valor =  $('#fila'+idsele).val();
+    let venta = $(this).parent().parent().children('td:eq(0)').text();
+    let producto = $(this).parent().parent().children('td:eq(1)').text();
+    let campo2 = $(this).parent().parent().children('td:eq(2)');
+    let campo4 =  $(this).parent().parent().children('td:eq(4)');
+    let varurl = "/ventas/update";
+    $.ajax({
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},  
+        type: "post",
+        url : varurl,
+        datatype:'json',
+        data :{'CantidadProducto': valor, 'Producto': producto, 'Venta': venta, } ,
+             success : function(resul){
+                if($.isEmptyObject(resul.error)){
+                   // $('#th-action').html('Editar');
+                    campo2.html(valor);
+                    campo4.html(btn_Edit)
+                    $("#vnt-contenedor").load(" #vnt-contenedor");              
+                    toastr.success(resul.msj,"!!ATENCIÓN!!" );
+                   
+                }else{
+                    toastr.error(resul.error,"!!ATENCIÓN!!" ); 
+                }    
+           // console.log(resul);
+            
+        }
+        });
+
       
   });  
 
@@ -262,5 +289,9 @@ function mostrarDetalle(id){
 
     }
  });
+function limpiarFechas(){
+    $("#datepickerF1").val("");
+    $("#datepickerF2").val("");
+}
 
  

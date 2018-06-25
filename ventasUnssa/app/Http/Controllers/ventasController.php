@@ -119,8 +119,7 @@ class ventasController extends Controller
 
     function listaVentas(){
        /*Solo aparecen las ventas del día correspondiente */
-      
-        $ventas = Venta::whereDate('created_at', DB::raw('CURDATE()'))->paginate(3);
+        $ventas = Venta::whereDate('created_at', DB::raw('CURDATE()'))->paginate(15);
         //return view('ventas.ventas')->with("ventas", $venta);
          return view('ventas.ventas', compact('ventas')); 
     }
@@ -149,7 +148,7 @@ class ventasController extends Controller
                             <th>Producto</th>
                             <th>U/V</th>
                             <th>P/U</th>
-                            <th>Editar</th>
+                            <th id="th-action">Editar</th>
                             <th>Eliminar</th>
                         </tr></thead><tbody>
                         ';
@@ -242,6 +241,30 @@ class ventasController extends Controller
         return response()->json(['msj'=>"REGISTROS ELIMINADO"]);  
        
     }
+    function updateVentas(Request $request){
+        $datos = $request->all();
+
+        $messages = [
+            'CantidadProducto.numeric'        => 'Por favor ingrese datos númericos',
+            'CantidadProducto.max'            => 'El máximo número que puede ingresar es 500',
+        ];
+        $validator = Validator::make($datos, [
+            'CantidadProducto'            =>    'numeric | max:500',
+          ],  $messages );
+          if ($validator->passes()) {
+              $rawProductos = DB::raw("update ventadetalles SET cantidad = ".$request->CantidadProducto." ,total = ( ".$request->CantidadProducto." * (select precio from productos where nombre = '".$request->Producto."')) where id_producto = (select id from productos where nombre = '".$request->Producto."') and id_venta = ".$request->Venta."");  
+              $detalle = DB::update($rawProductos);
+              return response()->json(['msj'=>"Datos actualizados correctamente"]); 
+          }else{
+            return response()->json(['error'=>$validator->errors()->all()]);
+         }  
+      
+    }
     
 }
 
+function logout(Request $request){
+ $this->guard()->logout();
+ $request->session()-invalidate();
+ return redirect('/');
+}

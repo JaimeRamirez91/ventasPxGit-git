@@ -24,6 +24,9 @@
 </head>
  
 <body>
+@if (Auth::guest())
+     
+@else              
     @include('plantillas.navbar')
     
     <!--Contenido-->
@@ -51,5 +54,10 @@
         });
        
     </script>  
+
+
+
+@endif
+
 </body>
 </html>

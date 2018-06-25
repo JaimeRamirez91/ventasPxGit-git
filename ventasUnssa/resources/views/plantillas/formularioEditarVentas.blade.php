@@ -6,7 +6,7 @@
 <div class="modal-header">
 <h4 class="centrar">DETALLE DE VENTA</h4>
 </div>
-<div class="modal-body  col-lg-12">
+<div class="modal-body  col-lg-12 col-md-12 hidden-sm">
     <!--Aqui va el contenido renderizado em ventasController de funcion  detalle venta--> 
     <div id="contenido-modal">
 
@@ -14,9 +14,7 @@
 </div>
 <div class="modal-footer">
 <div class="centrar">
-    <button type="button" class="btn btn-outline-danger btn-xs" data-dismiss="modal">Cancelar</button>
-    <button type="button" class="btn btn-outline-success  btn-xs" >Actualizar</button>
-    
+    <button type="button" class="btn btn-outline-danger btn-xs" data-dismiss="modal">Cancelar</button>    
 </div>
 </div>
 </div>

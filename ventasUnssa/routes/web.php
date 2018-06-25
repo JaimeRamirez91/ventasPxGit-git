@@ -28,10 +28,8 @@ Route::get('/delete/venta',  ['as' => 'ventas.ventas', 'uses' => 'ventasControll
 Route::get('/detalle/venta',  ['as' => 'ventas.ventas', 'uses' => 'ventasController@detalleVenta']);
 Route::get('/delete/detalle',  ['as' => 'ventas.ventas', 'uses' => 'ventasController@deleteDetalle']);
 Route::post('/ventas',  ['as' => 'ventas.ventas', 'uses' => 'ventasController@registroVentas']);
-
+Route::post('/ventas/update',  ['as' => 'ventas.ventas', 'uses' => 'ventasController@updateVentas']);
 Route::get('crear_reporte_semana/{pdf}/{desde}/{hasta}', 'PdfController@crear_reporte_porsemana');
-
-
 //Auth::routes();
 
         // Authentication Routes...
