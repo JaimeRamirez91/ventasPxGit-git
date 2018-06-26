@@ -28,7 +28,8 @@ function guardarRegistro(){
       success : function(resul){
   
           if($.isEmptyObject(resul.error)){
-              $("#vnt-contenedor").load(" #vnt-contenedor");
+            $("#buscarVenta").hide();
+            //  $("#vnt-contenedor").load(" #vnt-contenedor");
               toastr.success(resul.msj,"!!ATENCIÓN!!" );
               limpiarRegistro();
           }else{
@@ -97,24 +98,28 @@ function resetValores(){
 
 
 /*paginacion de url*/
+/*
 $(document).on('click', '#vnt-contenedor .pagination a', function(e){
       e.preventDefault();
       var page = $(this).attr('href').split('page=')[1];
-     // console.log($(this).attr('href'));
-      $("#vnt-contenedor").load($(this).attr('href')+" #vnt-contenedor" );
-       var page = $(this).attr('href').split('page=')[1];
+      
       console.log($(this).attr('href'));
-      $("#vnt-contenedor").load($(this).attr('href')+" #vnt-contenedor" );
-});
+     $("#vnt-contenedor").load($(this).attr('href')+" #vnt-contenedor" );
+      $(this).attr('href').split('page=')[1];
+      console.log($(this).attr('href'));
+    // $("#vnt-contenedor").load($(this).attr('href')+" #vnt-contenedor" );
+});*/
   
  
  $(document).ready(function(){
   $("#inpFolder").focus();
+  $("vnt-contenedor").show();
+  $("#vnt-contenedor2").hide();
   
   //document.getElementById('inpFolder').focus();
  });
 
- function deleteVenta(id){
+ function deleteVenta(id , row){
     let varurl = "/delete/venta"; 
     let a = 1;
      $.alertable.confirm("Esta seguro de eliminar la venta con correlativo:"+id).then(function(){
@@ -125,8 +130,9 @@ $(document).on('click', '#vnt-contenedor .pagination a', function(e){
             datatype:'json',
             data :{'valor': id,},
             success : function(resul){
-                $("#vnt-contenedor").load(" #vnt-contenedor");
+                //$("#vnt-contenedor").load(" #vnt-contenedor");
                 toastr.error(resul.msj ,"!!ATENCIÓN!!" ); 
+                $("#"+row).remove();
             }
             });
 
@@ -173,14 +179,14 @@ function existeFecha (fecha) {
     return m > 0 && m < 13 && y > 0 && y < 32768 && d > 0 && d <= (new Date(y, m, 0)).getDate();
 }
 
-function mostrarDetalle(id){
+function mostrarDetalle(id,row){
     let varurl = "/detalle/venta";
     $.ajax({
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},  
         type: "get",
         url : varurl,
         datatype:'json',
-        data :{'valor': id,},
+        data :{'valor': id, 'fila': row},
         success : function(resul){
             
               // console.log(resul);
@@ -203,12 +209,12 @@ function mostrarDetalle(id){
     idsele = $(this).parent().parent().attr("href");
     nombre = $(this).parent().parent().children('td:eq(0)').text();
     nombre1 = $(this).parent().parent().children('td:eq(1)').text();
-    nombre2 = $(this).parent().parent().children('td:eq(2)').text();
+    nombre2 = $(this).parent().parent().children('td:eq(3)').text();
     row= document.getElementById(idsele);
     let VU="<input id='fila"+idsele+"' class='inp_estilo' style='width:50px;' type='text' name='nombredelacaja'>";
     let btn_Update = "<button id='btn-update' class='btn btn-outline-success  btn-xs' onclick=''><i class='fa fa-refresh '></i></button> ";  
-    $(this).parent().parent().children('td:eq(2)').html(VU);
-    $(this).parent().parent().children('td:eq(4)').html(btn_Update);
+    $(this).parent().parent().children('td:eq(3)').html(VU);
+    $(this).parent().parent().children('td:eq(5)').html(btn_Update);
    // $(this).parent().parent().children('td:eq(5)').hide();
   
     //$('#th-action').html('Actua.');
@@ -225,9 +231,13 @@ function mostrarDetalle(id){
     let btn_Edit = "<button id='btn-edit' class='btn btn-outline-success  btn-xs' onclick=''><i class='fa fa-edit '></i></button> "; 
     let valor =  $('#fila'+idsele).val();
     let venta = $(this).parent().parent().children('td:eq(0)').text();
-    let producto = $(this).parent().parent().children('td:eq(1)').text();
-    let campo2 = $(this).parent().parent().children('td:eq(2)');
-    let campo4 =  $(this).parent().parent().children('td:eq(4)');
+    let fila = $(this).parent().parent().children('td:eq(1)').text();
+    let producto = $(this).parent().parent().children('td:eq(2)').text();
+    let campo2 = $(this).parent().parent().children('td:eq(3)');
+    let campo4 =  $(this).parent().parent().children('td:eq(5)');
+    let id="#"+fila;
+    let id_final = id.split(" ");
+    alert(id_final);
     let varurl = "/ventas/update";
     $.ajax({
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},  
@@ -237,16 +247,15 @@ function mostrarDetalle(id){
         data :{'CantidadProducto': valor, 'Producto': producto, 'Venta': venta, } ,
              success : function(resul){
                 if($.isEmptyObject(resul.error)){
-                   // $('#th-action').html('Editar');
+
                     campo2.html(valor);
                     campo4.html(btn_Edit)
-                    $("#vnt-contenedor").load(" #vnt-contenedor");              
+                    $("#1").html("<p>hgh</p>")           
                     toastr.success(resul.msj,"!!ATENCIÓN!!" );
                    
                 }else{
                     toastr.error(resul.error,"!!ATENCIÓN!!" ); 
                 }    
-           // console.log(resul);
             
         }
         });
@@ -275,11 +284,10 @@ function mostrarDetalle(id){
                 datatype:'json',
                 data :{'producto': nombre, 'venta': id_venta,} ,
                      success : function(resul){
-                   // console.log(resul);
                     toastr.success(resul.msj,"!!ATENCIÓN!!" ); 
                     padre = row.parentNode;
                     padre.removeChild(row);
-                    $("#vnt-contenedor").load(" #vnt-contenedor");
+                 //   $("#vnt-contenedor").load(" #vnt-contenedor");
                 }
                 });
 
@@ -294,4 +302,20 @@ function limpiarFechas(){
     $("#datepickerF2").val("");
 }
 
+function buscarVentas(){
+    let varurl = "/ventas";  
+    $.ajax({
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},  
+        type: "get",
+        url : varurl,
+        datatype:'json',
+        data :{'fecha1': "2018-06-1", 'fecha2':"2018-06-30",} ,
+            success : function(result){
+                  console.log(result.msj); 
+                $("#vnt-contenedor").html(result);
+               
+               // $('#quitar').replaceWith(html);
+             }
+        });  
+}
  

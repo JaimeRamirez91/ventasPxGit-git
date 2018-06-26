@@ -12,7 +12,7 @@
                     <div id ="calendario" class="input-group mb-3">
                        <input id="datepickerF1" placeholder="Desde" width="276" />
                     </div>
-                </div> 
+            </div> 
 
                 <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6">
                     <div class="input-group mb-3">

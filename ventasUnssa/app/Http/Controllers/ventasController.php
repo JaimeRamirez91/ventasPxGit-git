@@ -117,11 +117,111 @@ class ventasController extends Controller
               }      
     }
 
-    function listaVentas(){
+    function listaVentas(Request $request){
        /*Solo aparecen las ventas del día correspondiente */
-        $ventas = Venta::whereDate('created_at', DB::raw('CURDATE()'))->paginate(15);
-        //return view('ventas.ventas')->with("ventas", $venta);
-         return view('ventas.ventas', compact('ventas')); 
+       if(empty( $request->fecha1 and $request->fecha1)){
+           return view('ventas.ventas');
+      }else{
+      //  $ventas =  Venta::whereDate('created_at', '>=', date('2018-06-1'))->whereDate('created_at', '<=', date('2018-06-30'))->paginate(2);
+      
+      //$ventas =  Venta::whereDate('created_at', '>=', date('2018-06-1'))->whereDate('created_at', '<=', date('2018-06-30'));
+      //return view('plantillas.tablaventas', compact('ventas'));
+     
+            $rawVentas = DB::raw('SELECT id, created_at, total from ventas 
+            where CAST(created_at AS DATE) >= "2018-06-1" and CAST(created_at AS DATE) <= "2018-06-30" 
+            order by id');
+            $ventas = DB::select($rawVentas);
+            $cadena ='<div class="container margen-top-tabla" id="quitar">
+
+            <div class="row margen-top">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-10">
+        
+                            <table id="tablapb" class="table text-center">
+                             
+                        <thead>
+                        <tr>
+                            <th>Identificador</th> 
+                            <th>Correlativo de Venta</th>
+                            <th>Fecha y hora</th>
+                            <th>Total</th>
+                            <th>Acciones</th>
+                    
+                        </tr>
+                        </thead>
+                        <tbody>';
+
+                        for ($i = 0; $i < count($ventas); $i++){
+                 
+                            $Contador = 1;
+                            $indice   = $i+ 1;
+                            $id = " ";
+                            $row = " "; 
+                             
+                           foreach ($ventas[$i] as $dato ){
+                              
+                                if($i == $i){
+            
+                                        if($Contador == 1){
+                                            //agrega nueva fila 
+                                            
+                                            $cadena .="  <tr id='". $indice."' href='". $indice."'> " ;
+                                            $cadena .="<td>  ". $indice . "</td>" ;
+                                            $id = $dato;
+                                            $row = $indice;
+                                            
+                                        }
+                                        
+                                        //Concatenación  de varianle a cadena original
+                                        
+                                        $cadena .="  <td>  ". $dato . "</td>  ";
+
+            
+                                        if($Contador == 3){
+                                            //cierra la fila agregada en contador = 0 
+                                            $cadena .='<td> 
+                                            <button class="btn btn-outline-success  btn-xs" onclick="mostrarDetalle('.$id.','.$row.')">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                        <button class="btn  btn-outline-danger btn-xs" onclick="deleteVenta('.$id.','.$row.')">
+                                            <i class="fa fa-remove"></i></button> 
+                                            </td>' ;
+            
+                                            //Reset a la variable contador  
+                                            $Contador = 0;
+                                           // $indice = 0;
+                                           
+                                        }
+            
+                                    //Contador es igual a lo que trae más 1 
+                                    $Contador = $Contador + 1;
+                                   
+                                }
+            
+                            //end foreach    
+                            }
+                            //$indice = $indice + 1 ;
+                        //end for    
+                        }
+                        $finalCadena ='</tr> </tbody>
+                                    </table> 
+                                    </div>
+                                    <div class="col-lg-1"></div>
+                                </div>
+                                <div class="container" >
+                                    <div class="row">
+                                    </div>
+                                </div>        
+                            </div>';
+                       
+                         $cadenaHTML =  $cadena. $finalCadena;             
+     //   return response()->json([$cadenaHTML]
+           
+                         return response()->json([$cadenaHTML]);
+         //   return response()->json(['msj'=> $ventas]);
+       }
+       
+      // return view('ventas.ventas', compact('ventas')); 
     }
    
     function deleteVenta(Request $request){
@@ -145,6 +245,7 @@ class ventasController extends Controller
                  <table id="tabla" class="table text-center">
                 <thead> <tr>
                             <th>Identificador</th>
+                            <th>Fila</th>
                             <th>Producto</th>
                             <th>U/V</th>
                             <th>P/U</th>
@@ -165,10 +266,17 @@ class ventasController extends Controller
                             if($Contador == 1){
                                 //agrega nueva fila 
                                 $cadena .="  <tr id='". $indice."' href='". $indice."'> " ;
+                               
                             }
-
+                            
                             //Concatenación  de varianle a cadena original
-                            $cadena .="  <td>  ". $dato . "</td>  ";
+                             if($Contador == 1){
+                                $cadena .="  <td>  ". $dato . "</td>  ";
+                                $cadena .="  <td>  ". $request->fila."</td>  ";
+                             }else{
+                                $cadena .="  <td>  ". $dato . "</td>  ";
+                             }                          
+                            
 
                             if($Contador == 4){
                                 //cierra la fila agregada en contador = 0 
@@ -241,13 +349,20 @@ class ventasController extends Controller
         return response()->json(['msj'=>"REGISTROS ELIMINADO"]);  
        
     }
+    
+   function buscarVentas(Request $request){
+        
+    }
+
     function updateVentas(Request $request){
+
         $datos = $request->all();
 
         $messages = [
             'CantidadProducto.numeric'        => 'Por favor ingrese datos númericos',
             'CantidadProducto.max'            => 'El máximo número que puede ingresar es 500',
         ];
+
         $validator = Validator::make($datos, [
             'CantidadProducto'            =>    'numeric | max:500',
           ],  $messages );
@@ -260,11 +375,8 @@ class ventasController extends Controller
          }  
       
     }
+}
+ 
     
-}
 
-function logout(Request $request){
- $this->guard()->logout();
- $request->session()-invalidate();
- return redirect('/');
-}
+

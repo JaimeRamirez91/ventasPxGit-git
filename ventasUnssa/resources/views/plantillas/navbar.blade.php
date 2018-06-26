@@ -12,10 +12,6 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ url('/reportes') }}">REPORTES</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url('/ADMIN-VENTAS') }}">ADMINISTRAR VENTAS</a>
-      </li>
-      
      
     </ul>
 

@@ -24,6 +24,7 @@ Route::get('/reportes', function () {
     return view('pdf.reportePage');
 });
 Route::get('/ventas',  ['as' => 'ventas.ventas', 'uses' => 'ventasController@listaVentas']);
+Route::get('/ventas{page?}',  ['as' => 'ventas.ventas', 'uses' => 'ventasController@listaVentas']);
 Route::get('/delete/venta',  ['as' => 'ventas.ventas', 'uses' => 'ventasController@deleteVenta']);
 Route::get('/detalle/venta',  ['as' => 'ventas.ventas', 'uses' => 'ventasController@detalleVenta']);
 Route::get('/delete/detalle',  ['as' => 'ventas.ventas', 'uses' => 'ventasController@deleteDetalle']);
@@ -48,4 +49,4 @@ Route::get('crear_reporte_semana/{pdf}/{desde}/{hasta}', 'PdfController@crear_re
         $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
         
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');

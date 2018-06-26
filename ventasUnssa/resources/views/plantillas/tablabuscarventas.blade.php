@@ -1,10 +1,9 @@
-<div class="container margen-top-tabla" id="quitar">
-
+<div  class="container margen-top-tabla" >
     <div class="row margen-top">
         <div class="col-lg-1"></div>
         <div class="col-lg-10">
 
-                    <table id="tablapb" class="table text-center">
+                    <table class="table text-center">
                      
                 <thead>
                 <tr>
@@ -16,9 +15,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($ventas as $dato)
-                <tr href= "1" >  
-                 
+                @foreach($ventas1 as $dato)
+                <tr>    
                     <td>{{$dato->id}}</td>
                     <td>{{$dato->created_at}}</td>
                     <td>$ {{$dato->total}}</td>
@@ -42,10 +40,7 @@
     </div>
     <div class="container" >
         <div class="row">
-             {{$ventas->render()}}
+             {{$ventas1->render()}}
         </div>
     </div>
-
-   
-             
 </div>

@@ -4,9 +4,6 @@ body{
    /* min-height: 1200px;*/
     background-color: rgb(231, 240, 243); 
 }
-nav{
-   /* min-width: 900px !important;*/
-}
 .margen-top{
     margin-top: 5px;
 }
@@ -218,4 +215,13 @@ nav{
      }
  }
 
- 
+ .bordes{
+    border: 0.05em solid #46b8da !important;
+    border-radius: 10px !important;
+    background:rgb(230, 237, 238) !important;
+    float: center !important;
+    text-align: center !important;
+ }
+ .margen-tp{
+     margin-top: 30px;
+ }
